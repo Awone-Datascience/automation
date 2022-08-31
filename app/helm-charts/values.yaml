@@ -1,0 +1,97 @@
+# Default values for myapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: MIN_REPLICAS
+
+image:
+  name: fiber
+  repository: CONTAINER_IMAGE
+  pullPolicy: always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+deployment:
+  terminationGracePeriodSeconds: 600
+  containerPort: 8080
+  liveness:
+    httpGet:
+      path: /api
+      port: 8080
+  readiness:
+    httpGet:
+      path: /api
+      port: 8080
+
+imagePullSecrets: []
+nameOverride: "NAMESPACE"
+fullnameOverride: "NAMESPACE"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/group.name: NAMESPACE
+    kubernetes.io/ingress.class: alb
+  hosts:
+    - host: HOSTNAME
+      paths:
+        - pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: MIN_CPU
+    memory: MIN_MEMORY
+  requests:
+    cpu: MAX_CPU
+    memory: MAX_MEMORY
+
+autoscaling:
+  enabled: true
+  minReplicas: MIN_REPLICAS
+  maxReplicas: MAX_REPLICAS
+  targetCPUUtilizationPercentage: 60
+  targetHttpRequestsPerMinute:
+    name: http_requests_per_second
+    value: 5000m
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
