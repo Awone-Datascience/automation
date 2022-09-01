@@ -97,3 +97,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+config:
+  key: value
+  
