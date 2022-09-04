@@ -37,6 +37,13 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+          - configMapRef:
+              name: app-configs
+              optional: true
+          - secretRef:
+              name: app-secrets
+              optional: true
           ports:
           - containerPort: {{ .Values.deployment.containerPort }}
           {{- if .Values.deployment.liveness }}
