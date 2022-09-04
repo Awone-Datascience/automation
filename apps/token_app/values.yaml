@@ -1,0 +1,105 @@
+# Default values for myapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: MIN_REPLICAS
+
+image:
+  name: fiber
+  repository: CONTAINER_IMAGE
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+deployment:
+  terminationGracePeriodSeconds: 600
+  containerPort: 8051
+  liveness:
+    httpGet:
+      path: /docs
+      port: 8051
+  readiness:
+    httpGet:
+      path: /docs
+      port: 8051
+
+      
+podAnnotations: 
+  prometheus.io/port: "8051"
+  prometheus.io/scrape: "true"
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+    cpu: MIN_CPU
+    memory: MIN_MEMORY
+  limits:
+    cpu: MAX_CPU
+    memory: MAX_MEMORY
+    
+imagePullSecrets: []
+nameOverride: "NAMESPACE"
+fullnameOverride: "NAMESPACE"
+
+nodeSelector:
+  app: rtp
+
+tolerations: 
+  - effect: NoSchedule
+    key: dedicatedTo
+    operator: Equal
+    value: rtp
+
+affinity: {}
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "alb"
+    alb.ingress.kubernetes.io/group.name: NAMESPACE
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    # kubernetes.io/tls-acme: "true"
+  labels: {}
+
+  pathType: ImplementationSpecific
+
+
+
+autoscaling:
+  enabled: true
+  minReplicas: MIN_REPLICAS
+  maxReplicas: MAX_REPLICAS
+  targetCPUUtilizationPercentage: 60
+
+
+
+config:
+  key: value
