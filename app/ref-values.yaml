@@ -7,7 +7,7 @@ replicaCount: MIN_REPLICAS
 image:
   name: fiber
   repository: CONTAINER_IMAGE
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
