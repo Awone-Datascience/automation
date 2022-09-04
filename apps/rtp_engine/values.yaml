@@ -77,22 +77,18 @@ serviceAccount:
 service:
   type: NodePort
   port: 80
-
+  
+  
 ingress:
   enabled: true
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
+    kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/group.name: NAMESPACE
-    kubernetes.io/ingress.class: alb
-  hosts:
-    - host: HOSTNAME
-      paths:
-        - pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    # kubernetes.io/tls-acme: "true"
+  labels: {}
 
+  pathType: ImplementationSpecific
 
 
 autoscaling:
