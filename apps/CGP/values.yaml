@@ -1,0 +1,128 @@
+# Default values for myapp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: MIN_REPLICAS
+
+image:
+  name: fiber
+  repository: CONTAINER_IMAGE
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+deployment:
+  terminationGracePeriodSeconds: 600
+  containerPort: 8080
+  liveness:
+    httpGet:
+      path: /api/v1
+      port: 8080
+  readiness:
+    httpGet:
+      path: /api/v1
+      port: 8080
+
+imagePullSecrets: []
+nameOverride: "NAMESPACE"
+fullnameOverride: "NAMESPACE"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: 
+  prometheus.io/port: "8080"
+  prometheus.io/scrape: "true"
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 80
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: "alb"
+    alb.ingress.kubernetes.io/group.name: NAMESPACE
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
+    # kubernetes.io/tls-acme: "true"
+  labels: {}
+
+  pathType: ImplementationSpecific
+    #hosts:
+    #- chart-example.local
+  ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
+  extraPaths: []
+  # - path: /*
+  #   backend:
+  #     serviceName: ssl-redirect
+  #     servicePort: use-annotation
+  ## Or for k8s > 1.19
+  # - path: /*
+  #   pathType: Prefix
+  #   backend:
+  #     service:
+  #       name: ssl-redirect
+  #       port:
+  #         name: use-annotation
+
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+
+resources: 
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  requests:
+    cpu: MIN_CPU
+    memory: MIN_MEMORY
+  limits:
+    cpu: MAX_CPU
+    memory: MAX_MEMORY
+
+autoscaling:
+  enabled: true
+  minReplicas: MIN_REPLICAS
+  maxReplicas: MAX_REPLICAS
+  targetCPUUtilizationPercentage: 60
+  targetHttpRequestsPerMinute:
+    name: http_requests_per_second
+    value: 5000m
+  # targetMemoryUtilizationPercentage: 80
+
+
+
+affinity: {}
+nodeSelector:
+  app: rtp
+
+tolerations: 
+  - effect: NoSchedule
+    key: dedicatedTo
+    operator: Equal
+    value: rtp
+    
+config:
+  key: value
+  
