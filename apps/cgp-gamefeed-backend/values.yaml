@@ -62,7 +62,7 @@ ingress:
   # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
   # ingressClassName: nginx
   # Values can be templated
-  annotations: {}
+  annotations: 
     kubernetes.io/ingress.class: "alb"
     alb.ingress.kubernetes.io/group.name: NAMESPACE
     alb.ingress.kubernetes.io/scheme: "internet-facing"
