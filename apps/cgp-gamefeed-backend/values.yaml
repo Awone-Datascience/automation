@@ -63,7 +63,7 @@ ingress:
     alb.ingress.kubernetes.io/scheme: "internet-facing"
     # kubernetes.io/tls-acme: "true"
   labels: {}
-
+  path: /
   pathType: ImplementationSpecific
     #hosts:
     #- chart-example.local
