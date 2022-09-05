@@ -64,7 +64,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   labels: {}
   path: /
-  pathType: ImplementationSpecific
+  pathType: Prefix
   hosts:
     - HOSTNAME
   ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
