@@ -16,11 +16,11 @@ deployment:
   containerPort: 8080
   liveness:
     httpGet:
-      path: /api/v1
+      path: /api
       port: 8080
   readiness:
     httpGet:
-      path: /api/v1
+      path: /api
       port: 8080
 
 imagePullSecrets: []
@@ -107,21 +107,13 @@ autoscaling:
   maxReplicas: MAX_REPLICAS
   targetCPUUtilizationPercentage: 60
   targetHttpRequestsPerMinute:
-    name: http_requests_per_second
+    name: http_requests_per_second_NAMESPACE
     value: 5000m
   # targetMemoryUtilizationPercentage: 80
 
 
 
 affinity: {}
-nodeSelector:
-  app: rtp
-
-tolerations: 
-  - effect: NoSchedule
-    key: dedicatedTo
-    operator: Equal
-    value: rtp
     
 config:
   key: value
