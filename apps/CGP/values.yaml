@@ -65,8 +65,8 @@ ingress:
   labels: {}
   path: /
   pathType: ImplementationSpecific
-    #hosts:
-    #- chart-example.local
+  hosts:
+    - HOSTNAME
   ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
   extraPaths: []
   # - path: /*
