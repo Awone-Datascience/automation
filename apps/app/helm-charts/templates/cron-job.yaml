@@ -1,5 +1,10 @@
 {{- if .Values.cron.enabled -}}
 {{- $fullName := include "myapp.fullname" . -}}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $fullName }}
+---
 apiVersion: batch/v1
 kind: CronJob
 metadata:
