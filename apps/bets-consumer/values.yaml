@@ -101,3 +101,6 @@ autoscaling:
 
 config:
   key: value
+
+cron:
+  enabled: false

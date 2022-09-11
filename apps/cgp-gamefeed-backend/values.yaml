@@ -124,4 +124,6 @@ tolerations:
     
 config:
   key: value
-  
+
+cron:
+  enabled: false
