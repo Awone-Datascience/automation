@@ -28,8 +28,7 @@ spec:
   ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
    rules:
-    - host: {{ .Values.ingress.host }}
-      http:
+    - http:
         paths:
           - pathType: ImplementationSpecific
             backend:
