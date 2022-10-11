@@ -1,15 +1,15 @@
 apiVersion: v1
 data:
-  BACCARAT_URL: http://stg-rtp.royalgaming.online/result/baccarat
-  CASINO_HOLDEM_URL: http://stg-rtp.royalgaming.online/result/casino_holdem  
+  BACCARAT_URL: http://stage-rtp.royalgaming.online/result/baccarat
+  CASINO_HOLDEM_URL: http://stage-rtp.royalgaming.online/result/casino_holdem  
   DB_CLUSTER: bvtld.mongodb.net
-  DB_CLUSTER_NAME: rgdev
+  DB_CLUSTER_NAME: rgstage
   DB_CONNECTION_URL: mongodb+srv://aiadmin:Q4601Cfs9NT33Ry2@rgstage.bvtld.mongodb.net/rgdev?readPreference=primary&retryWrites=true&ssl=true
-  DB_DATABASE: rg
+  DB_DATABASE: rgdev
   ENV_URL: https://dev-api.royalgaming.online  
   HYPEX_SALT: 3309d355-0e71-4e1f-86ac-535056ce76c6
   KAFKA_BROKERS: b-2.stagecluster.o208ub.c3.kafka.eu-west-2.amazonaws.com:9092,b-1.stagecluster.o208ub.c3.kafka.eu-west-2.amazonaws.com:9092
-  MUFLISTEENPATTI_URL: http://stg-rtp.royalgaming.online/result/teen_muflis
+  MUFLISTEENPATTI_URL: https://stage-rtp.royalgaming.online/result/teen_muflis
   REDIS_ADDRESS: redis-dev.6ymrvw.ng.0001.euw2.cache.amazonaws.com:6379
   REDIS_DB: "10"
   REDIS_HOST: redis-dev.6ymrvw.ng.0001.euw2.cache.amazonaws.com
@@ -17,7 +17,7 @@ data:
   REDIS_PORT: "6379"
   REDIS_READER: redis-dev-ro.6ymrvw.ng.0001.euw2.cache.amazonaws.com:6379
   SETTLEMENT_URI: https://dev-settlement.royalgaming.online/api/v1/core/settle-open-bets  
-  TEENPATTI_URL: http://stg-rtp.royalgaming.online/result/teen_patti
+  TEENPATTI_URL: https://stage-rtp.royalgaming.online/result/teen_patti
   TEST_BASE_URL: https://dev.royalgaming.online
   TEST_GAME_LAUNCH_URL: '%s?token=%s&operatorId=%s&userName=%s&partnerId=%s&providerId=%s&lobby=%s&gameId=%s&opentable=%s'
   TEST_LOBBY_URL: '%s/auth?token=%s&operatorId=%s&partnerId=%s&providerId=%s'
@@ -27,7 +27,11 @@ data:
   TEST_TOKEN: f23004ee-2bf4-49b9-a98b-f0189520b795
   VIDEO_URL: https://www.youtube.com/embed/rKspGEzJ8eU?rel=0&modestbranding=1&autohide=1&autoplay=1&loop=1&showinfo=0&controls=0
   WEBSOCKET_URL: dev-feed.royalgaming.online
+  GAME_ID: VGDT101
+  TABLE_ID: VTGDT101
+  RTP_BASE_URL: https://stage-rtp.cardcasino.io
 kind: ConfigMap
 metadata:
+  annotations:
+    v1.kubernetes-replicator.olli.com/replicate-to-namespaces: .*-dev
   name: app-configs
-  namespace: NAMESPACE
