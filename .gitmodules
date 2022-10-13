@@ -1,0 +1,3 @@
+[submodule "DevOpsAutomation"]
+	path = DevOpsAutomation
+	url = https://github.com/hypexone/DevOpsAutomation.git
