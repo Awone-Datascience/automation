@@ -7,4 +7,5 @@ phases:
     commands:
       - git pull
       - git status
+      - ls
       - echo "Update Kube Config"
