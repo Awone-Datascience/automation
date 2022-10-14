@@ -7,5 +7,5 @@ phases:
     commands:
       - git pull
       - git status
-      - ls
+      - ls DevOpsAutomation
       - echo "Update Kube Config"
