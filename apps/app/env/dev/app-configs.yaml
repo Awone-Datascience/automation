@@ -32,6 +32,4 @@ data:
   RTP_BASE_URL: https://stage-rtp.cardcasino.io
 kind: ConfigMap
 metadata:
-  annotations:
-    v1.kubernetes-replicator.olli.com/replicate-to-namespaces: .*-dev
   name: app-configs
