@@ -23,12 +23,12 @@ data:
   TEST_LOBBY_URL: '%s/auth?token=%s&operatorId=%s&partnerId=%s&providerId=%s'
   TEST_OPERATOR: TestOperator
   TEST_OPERATOR_BASE_URL: https://dev-game.royalgaming.online
-  TEST_OPERATOR_LOBBY_URL: '%s?token=%s&operatorId=%s&partnerId=%s&providerId=%s&lobby=%s'
+  TEST_OPERATOR_LOBBY_URL: '%s/auth?token=%s&operatorId=%s&partnerId=%s&providerId=%s'
   TEST_TOKEN: f23004ee-2bf4-49b9-a98b-f0189520b795
   VIDEO_URL: https://www.youtube.com/embed/rKspGEzJ8eU?rel=0&modestbranding=1&autohide=1&autoplay=1&loop=1&showinfo=0&controls=0
   WEBSOCKET_URL: dev-feed.royalgaming.online
-  GAME_ID: VGDT101
-  TABLE_ID: VTGDT101
+  GAME_ID: VGTTC101
+  TABLE_ID: VTGTTC101
   RTP_BASE_URL: https://stage-rtp.cardcasino.io
 kind: ConfigMap
 metadata:
