@@ -13,17 +13,17 @@ image:
 
 deployment:
   terminationGracePeriodSeconds: 600
-  containerPort: 8051
+  containerPort: 8080
   liveness:
     tcpSocket:
-      port: 8051
+      port: 8080
   readiness:
     tcpSocket:
-      port: 8051
+      port: 8080
 
       
 podAnnotations: 
-  prometheus.io/port: "8051"
+  prometheus.io/port: "8080"
   prometheus.io/scrape: "true"
 
 podSecurityContext: {}
