@@ -15,10 +15,12 @@ deployment:
   terminationGracePeriodSeconds: 600
   containerPort: 8051
   liveness:
-    tcpSocket:
+    httpGet:
+      path: /docs
       port: 8051
   readiness:
-    tcpSocket:
+    httpGet:
+      path: /docs
       port: 8051
 
       
