@@ -14,14 +14,14 @@ image:
 deployment:
   terminationGracePeriodSeconds: 600
   containerPort: 8051
-#   liveness:
-#     httpGet:
-#       path: /docs
-#       port: 8051
-#   readiness:
-#     httpGet:
-#       path: /docs
-#       port: 8051
+  liveness:
+    httpGet:
+      path: /docs
+      port: 8051
+  readiness:
+    httpGet:
+      path: /docs
+      port: 8051
 
       
 podAnnotations: 
